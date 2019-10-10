@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AppVendas.View.PedidosPage"
+    Title="Pedidos">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Margin="5"
+            Text="SELECIONE UM CONSÓRCIO PARA APROVAÇÃO"
+            FontSize="Subtitle"
+            HorizontalTextAlignment="Center"
+            TextColor="#000" />
+
+        <ListView
+            Grid.Row="1"
+            HasUnevenRows="True"
+            ItemsSource="{Binding Pedidos}"
+            SelectedItem="{Binding PedidoSelected}">
+
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <Grid
+                    Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        Aspect="AspectFit"
+                        Source="box" />
+ 
+                   <StackLayout
+                       Grid.Column="1">
+
+                        <Label
+                            Text="{Binding Produto}"
+                            TextColor="#000"
+                            FontAttributes="Bold"
+                            FontSize="Subtitle"/>
+
+                       <Label
+                           Text="{Binding Cliente}"     
+                           TextColor="Gray"
+                           FontSize="Default"/>
+
+                   </StackLayout>
+
+                    <Label
+                        Grid.Column="2"
+                        Margin="0,0,0,10"
+                        Text="{Binding Valor, StringFormat='R$ {0}'}"
+                        HorizontalTextAlignment="End"
+                        VerticalOptions="Center"
+                        TextColor="Blue"
+                        FontAttributes="Bold"
+                        FontSize="Medium"/>
+ 
+               </Grid>
+             </ViewCell>
+           </DataTemplate>
+
+         </ListView.ItemTemplate>
+
+        </ListView>
+ 
+        <Button
+            Grid.Row="2"
+            Padding="0,10"
+            BackgroundColor="Green"
+            IsVisible="{OnPlatform Android='false', iOS='true'}"
+            TextColor="#FFF"
+            HorizontalOptions="FillAndExpand"
+            Command="{Binding NovoPedidoCmd}"
+            Text="SIMULAR UM NOVO CONSÓRCIO" />
+
+    </Grid>
+</ContentPage>
